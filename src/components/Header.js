@@ -1,7 +1,4 @@
 import React, { useState } from "react";
-import { AiOutlineUser } from "react-icons/ai";
-import { AiOutlineSearch } from "react-icons/ai";
-import { BsBookmarkPlus } from "react-icons/bs";
 import { FaBars } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import "./header.css";
