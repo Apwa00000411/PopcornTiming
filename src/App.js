@@ -11,7 +11,7 @@ import Footer from "./components/Footer";
 function App() {
   return (
     <div>
-      <BrowserRouter>
+      <BrowserRouter basename={"/PopcornTiming"}>
         <Header />
         <Routes>
           <Route path="/" element={<Home />}></Route>
