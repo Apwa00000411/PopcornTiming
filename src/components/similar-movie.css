@@ -1,0 +1,181 @@
+/* Similar Movies */
+.similar__list {
+  width: 90%;
+  margin-top: auto;
+}
+
+.similar__name {
+  font-size: 1.75rem;
+  margin-bottom: 2rem;
+  color: #fff;
+  font-weight: 800;
+}
+
+/* Similar Single */
+.similar__single {
+  display: flex;
+  /* flex-wrap: wrap; */
+  justify-content: center;
+  width: 100%;
+}
+
+.similar {
+  display: inline-block;
+  transition: transform 0.2s;
+  position: relative;
+  top: 10%;
+  bottom: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 0.05rem;
+  cursor: pointer;
+  z-index: 0;
+}
+
+.similar:hover {
+  transform: scale(1.2);
+  z-index: 1000;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.similar__img {
+  height: 300px;
+}
+
+.similar__overlay {
+  position: absolute;
+  padding: 0 1rem 1rem 1rem;
+  bottom: 0px;
+  height: 290px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: flex-end;
+  background-image: linear-gradient(rgb(0, 0, 0, 0), rgb(0, 0, 0, 1));
+  opacity: 0;
+  transition: opacity 0.2s;
+  color: #fff;
+  z-index: 1000;
+}
+
+.similar__overlay:hover {
+  opacity: 1;
+}
+
+.similar__title {
+  font-weight: 900;
+  font-size: 1rem;
+  margin: 0.4rem 0;
+}
+
+.similar__runtime {
+  font-size: 0.69rem;
+  margin-bottom: 0.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.similar__rating {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.similar__description {
+  font-style: italic;
+  font-size: 0.75rem;
+  margin-bottom: 0.25rem;
+}
+
+/* //////// */
+/* special */
+@media only screen and (min-width: 1901px) {
+  .similar__list {
+    margin-top: 10%;
+  }
+
+  .similar__name {
+    font-size: 2.1rem;
+    font-weight: 600;
+  }
+}
+
+/* //////// */
+
+/* //////// */
+/* large monitor */
+@media only screen and (min-width: 1201px) and (max-width: 1900px) {
+  .similar__list {
+    margin-top: 10%;
+  }
+
+  .similar__name {
+    font-size: 1.9rem;
+    font-weight: 600;
+  }
+}
+
+/* //////// */
+
+/* //////// */
+/* lagre monitor */
+@media only screen and (min-width: 1201px) {
+  .similar__list {
+    margin-top: 10%;
+  }
+
+  .similar__name {
+    font-size: 1.8rem;
+    font-weight: 600;
+  }
+}
+
+/* //////// */
+
+/* //////// */
+/* laptop */
+@media only screen and (min-width: 993px) and (max-width: 1200px) {
+  .similar__list {
+    margin-top: 10%;
+  }
+
+  .similar__name {
+    font-size: 1.7rem;
+    font-weight: 600;
+  }
+}
+
+/* //////// */
+
+/* //////// */
+/* tablet */
+@media only screen and (min-width: 769px) and (max-width: 992px) {
+  .similar__list {
+    margin-top: 10%;
+  }
+
+  .similar__name {
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+}
+
+/* //////// */
+
+/* //////// */
+/* mobile */
+@media only screen and (max-width: 768px) {
+  .similar__list {
+    margin-top: 10%;
+  }
+
+  .similar__name {
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+}
+
+/* //////// */
