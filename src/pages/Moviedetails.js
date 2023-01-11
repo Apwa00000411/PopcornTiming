@@ -14,6 +14,7 @@ import Loading from "./Loading";
 import SimilarMovies from "../components/SimilarMovies";
 import SimilarSingle from "../components/SimilarSingle";
 import { useGlobalContext } from "../Context";
+import HorizontalScroll from "react-horizontal-scrolling";
 
 const Moviedetails = () => {
   const [currentMovieDetails, setCurrentMovieDetails] = useState();
@@ -215,13 +216,11 @@ const Moviedetails = () => {
           <div className="similar__list">
             <h2 className="similar__name">{"similar movies".toUpperCase()}</h2>
             <div className="similar__single">
-              <div className="carousel rounded-box ">
-                <div className="carousel-item">
-                  {similarMovies?.map((movie) => (
-                    <SimilarSingle movie={movie} />
-                  ))}
-                </div>
-              </div>
+              <HorizontalScroll className="similar__items">
+                {similarMovies?.map((movie) => (
+                  <SimilarSingle movie={movie} />
+                ))}
+              </HorizontalScroll>
             </div>
           </div>
         </div>

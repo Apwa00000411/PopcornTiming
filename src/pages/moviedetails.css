@@ -158,9 +158,12 @@
 }
 
 .similar__single {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  height: 300px;
+  width: auto;
+}
+
+.similar__items {
+  height: 300px;
 }
 
 /* //////// */
@@ -209,9 +212,6 @@
   }
 }
 
-/* //////// */
-
-/* //////// */
 /* mobile */
 @media only screen and (max-width: 768px) {
   .movie__name {
@@ -223,7 +223,12 @@
     margin-top: 20px;
   }
 }
-/* //////// */
+
+@media (max-width: 620px) {
+  .movie__detailRight {
+    margin-right: 20px;
+  }
+}
 
 @media (max-width: 390px) {
   .synopsisText {

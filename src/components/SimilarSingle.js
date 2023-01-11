@@ -14,7 +14,7 @@ const SimilarSingle = ({ movie }) => {
           src={`https://image.tmdb.org/t/p/original${
             movie ? movie.poster_path : ""
           }`}
-          className="rounded-box similar__img "
+          className="similar__img "
         />
         <div className="similar__overlay">
           <div className="similar__title">
