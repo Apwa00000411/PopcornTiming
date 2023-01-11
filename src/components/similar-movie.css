@@ -114,13 +114,9 @@
 
   .similar__name {
     font-size: 1.9rem;
-    font-weight: 600;
   }
 }
 
-/* //////// */
-
-/* //////// */
 /* lagre monitor */
 @media only screen and (min-width: 1201px) {
   .similar__list {
@@ -129,53 +125,48 @@
 
   .similar__name {
     font-size: 1.8rem;
-    font-weight: 600;
   }
 }
 
-/* //////// */
-
-/* //////// */
 /* laptop */
-@media only screen and (min-width: 993px) and (max-width: 1200px) {
+@media (max-width: 1200px) {
   .similar__list {
     margin-top: 10%;
   }
 
   .similar__name {
     font-size: 1.7rem;
-    font-weight: 600;
   }
 }
 
-/* //////// */
-
-/* //////// */
 /* tablet */
-@media only screen and (min-width: 769px) and (max-width: 992px) {
+@media (max-width: 992px) {
   .similar__list {
     margin-top: 10%;
   }
 
   .similar__name {
     font-size: 1.5rem;
-    font-weight: 600;
   }
 }
 
-/* //////// */
-
-/* //////// */
 /* mobile */
-@media only screen and (max-width: 768px) {
+@media (max-width: 768px) {
   .similar__list {
     margin-top: 10%;
   }
 
   .similar__name {
     font-size: 1.2rem;
-    font-weight: 600;
   }
 }
 
-/* //////// */
+@media (max-width: 620px) {
+  .similar {
+    height: 200px;
+  }
+
+  .similar__img {
+    height: 200px;
+  }
+}

@@ -8,6 +8,7 @@ import {
   BsShare,
   BsFillBookmarkDashFill,
   BsFillBookmarkPlusFill,
+  BsBookmarkPlus,
 } from "react-icons/bs";
 import Loading from "./Loading";
 import SimilarMovies from "../components/SimilarMovies";
@@ -77,12 +78,16 @@ const Moviedetails = () => {
           <div className="movie__detail">
             <div className="movie__detailLeft">
               <div className="movie__posterBox">
-                <img
-                  className="movie__poster"
-                  src={`https://image.tmdb.org/t/p/original${
-                    currentMovieDetails ? currentMovieDetails.poster_path : ""
-                  }`}
-                />
+                {window.screen.width <= 400 ? (
+                  ""
+                ) : (
+                  <img
+                    className="movie__poster"
+                    src={`https://image.tmdb.org/t/p/original${
+                      currentMovieDetails ? currentMovieDetails.poster_path : ""
+                    }`}
+                  />
+                )}
               </div>
             </div>
             <div className="movie__detailRight">
@@ -97,14 +102,14 @@ const Moviedetails = () => {
                       className="movie__share"
                       onClick={openModal}
                     />
-                    {addWatchlist ? (
+                    {!addWatchlist ? (
                       <BsFillBookmarkPlusFill
                         className="movie__add"
                         style={{ width: "25px" }}
                         onClick={() => setAddWatchlist(!addWatchlist)}
                       />
                     ) : (
-                      <BsFillBookmarkPlusFill
+                      <BsBookmarkPlus
                         className="movie__unadd"
                         style={{ width: "25px" }}
                         onClick={() => setAddWatchlist(!addWatchlist)}

@@ -17,10 +17,16 @@ main {
   align-items: center;
 }
 
-.header span {
+.footer__span {
   color: white;
 }
 
 .header a {
   color: #f94c66;
+}
+
+@media (max-width: 390px) {
+  .footer__span {
+    font-size: 0.8rem;
+  }
 }

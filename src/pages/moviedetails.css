@@ -196,7 +196,7 @@
 /* //////// */
 
 /* //////// */
-/* mobile */
+/* tablet */
 @media only screen and (min-width: 769px) and (max-width: 992px) {
   .movie__name {
     font-weight: 600;
@@ -223,5 +223,10 @@
     margin-top: 20px;
   }
 }
-
 /* //////// */
+
+@media (max-width: 390px) {
+  .synopsisText {
+    margin-top: 0.5rem;
+  }
+}

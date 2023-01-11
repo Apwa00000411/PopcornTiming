@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Alfa+Slab+One");
 
 main {
-  min-height: 10vh;
+  min-height: 10%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -83,4 +83,16 @@ main {
   height: 30px;
   border: 1px solid #777;
   color: red;
+}
+
+@media (max-width: 550px) {
+  .header__logo {
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .header__logo {
+    font-size: 1.5rem;
+  }
 }

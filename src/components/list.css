@@ -26,3 +26,23 @@
   flex-wrap: wrap;
   justify-content: center;
 }
+
+@media (max-width: 768px) {
+  .list__title {
+    font-size: 1.5rem;
+  }
+
+  .list__genres {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 390px) {
+  .list__title {
+    font-size: 1.3rem;
+  }
+
+  .list__genres {
+    font-size: 1rem;
+  }
+}

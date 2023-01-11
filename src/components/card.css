@@ -68,3 +68,13 @@
   font-size: 0.75rem;
   margin-bottom: 0.25rem;
 }
+
+@media (max-width: 620px) {
+  .cards {
+    height: 250px;
+    min-width: auto;
+  }
+  .cards__img {
+    height: 250px;
+  }
+}

@@ -20,7 +20,7 @@ const Home = () => {
     fetchData();
   }, []);
 
-  const screen = window.screen.width;
+  // const screen = window.innerWidth;
 
   return (
     <>
@@ -31,7 +31,7 @@ const Home = () => {
         transitionTime={3}
         showStatus={false}
       >
-        {popularMovies.map((movie) => {
+        {popularMovies?.map((movie) => {
           const {
             id,
             backdrop_path,
@@ -53,17 +53,17 @@ const Home = () => {
               <div className="posterImage__overlay">
                 <div className="posterImage__title">{original_title}</div>
                 <div className="posterImage__runtime">
-                  <>{release_date}</>
+                  <>{window.screen.width <= 400 ? "" : release_date}</>
 
                   <div className="posterImage__rating">
-                    <>{vote_average}</>
-                    <BsStarFill />
+                    <> {window.screen.width <= 400 ? "" : vote_average}</>
+                    {window.screen.width <= 400 ? "" : <BsStarFill />}
                   </div>
                 </div>
                 <div className="posterImage__description">
-                  {screen <= 768
-                    ? overview.slice(0, 80) + "..."
-                    : overview.slice(0, 100) + "..."}
+                  {window.screen.width <= 620
+                    ? ""
+                    : overview.slice(0, 80) + "..."}
                 </div>
               </div>
             </Link>
