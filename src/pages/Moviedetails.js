@@ -15,6 +15,7 @@ import SimilarMovies from "../components/SimilarMovies";
 import SimilarSingle from "../components/SimilarSingle";
 import { useGlobalContext } from "../Context";
 import HorizontalScroll from "react-horizontal-scrolling";
+import { AiOutlinePlayCircle } from "react-icons/ai/";
 
 const Moviedetails = () => {
   const [currentMovieDetails, setCurrentMovieDetails] = useState();
@@ -76,6 +77,7 @@ const Moviedetails = () => {
               }`}
             />
           </div>
+          <AiOutlinePlayCircle className="movie__play" onClick={openModal} />
           <div className="movie__detail">
             <div className="movie__detailLeft">
               <div className="movie__posterBox">
