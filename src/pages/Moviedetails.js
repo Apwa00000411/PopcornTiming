@@ -19,6 +19,11 @@ import { AiOutlinePlayCircle } from "react-icons/ai/";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; //
 import { Carousel } from "react-responsive-carousel";
 import { unavailable, unavailableBackdrop } from "../Config/Config";
+import axios from "axios";
+import Trailer from "../components/Trailer/Trailer";
+import YouTube from "react-youtube";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const Moviedetails = () => {
   const [currentMovieDetails, setCurrentMovieDetails] = useState();
@@ -26,7 +31,10 @@ const Moviedetails = () => {
 
   const [addWatchlist, setAddWatchlist] = useState(true);
   const [similarMovies, setSimilarMovies] = useState();
-  const { openModal, loading, setLoading } = useGlobalContext();
+  const { openModal, loading, setLoading, openVideo, closeVideo } =
+    useGlobalContext();
+  const [video, setVideo] = useState();
+  const [playing, setPlaying] = useState(false);
 
   useEffect(() => {
     const getData = async () => {
@@ -62,6 +70,33 @@ const Moviedetails = () => {
     getSimilar();
   }, [id]);
 
+  const fetchVideo = async () => {
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/3/movie/${id}/videos?api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US`
+    );
+    setVideo(data.results[0]?.key);
+    console.log(data.results[0]?.key);
+  };
+
+  useEffect(() => {
+    fetchVideo();
+  }, [id]);
+
+  const width = window.screen.width <= 400 ? "350" : "750";
+  const opts = {
+    height: "390",
+    width: width,
+    playerVars: {
+      autoplay: 1,
+      controls: 0,
+      cc_load_policy: 0,
+      fs: 0,
+      iv_load_policy: 0,
+      modestbranding: 0,
+      rel: 0,
+      showinfo: 0,
+    },
+  };
   return (
     <>
       {loading ? (
@@ -69,16 +104,31 @@ const Moviedetails = () => {
       ) : (
         <div className="movie">
           <div className="movie__intro">
-            <img
-              className="movie__backdrop"
-              src={
-                currentMovieDetails && currentMovieDetails.backdrop_path
-                  ? `https://image.tmdb.org/t/p/original${currentMovieDetails.backdrop_path}`
-                  : unavailableBackdrop
-              }
-            />
+            {loading ? (
+              <SkeletonTheme baseColor="#202020" highlightColor="#444">
+                <p>
+                  <Skeleton height={900} duration="3" />
+                </p>
+              </SkeletonTheme>
+            ) : (
+              <img
+                className="movie__backdrop"
+                src={
+                  currentMovieDetails && currentMovieDetails.backdrop_path
+                    ? `https://image.tmdb.org/t/p/original${currentMovieDetails.backdrop_path}`
+                    : unavailableBackdrop
+                }
+              />
+            )}
+
+            {/* <YouTube videoId={video} opts={opts} />; */}
           </div>
-          <AiOutlinePlayCircle className="movie__play" onClick={openModal} />
+          {/* {video ? (
+            <AiOutlinePlayCircle className="movie__play" onClick={openModal} />
+          ) : (
+            ""
+          )} */}
+
           <div className="movie__detail">
             <div className="movie__detailLeft">
               <div className="movie__posterBox">
@@ -167,10 +217,16 @@ const Moviedetails = () => {
               <div className="movie__datailRightBottom">
                 <div className="synopsisText">Synopsis</div>
                 <div>
-                  {currentMovieDetails ? currentMovieDetails.overview : ""}
+                  {currentMovieDetails
+                    ? currentMovieDetails.overview.slice(0, 330) + "..."
+                    : ""}
                 </div>
               </div>
             </div>
+          </div>
+          <div className="youtube">
+            <div className="synopsisText">Trailer</div>
+            <YouTube videoId={video} opts={opts} fullScreen />
           </div>
           <div className="similar__list">
             <h2 className="similar__name">{"similar movies".toUpperCase()}</h2>

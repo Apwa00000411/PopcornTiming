@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react";
-import "./modal.css";
-import { FaTimes } from "react-icons/fa";
-import { CgDanger } from "react-icons/cg";
-import { useGlobalContext } from "../Context";
+import "../modal.css";
+import { useGlobalContext } from "../../Context";
 import YouTube from "react-youtube";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import Ratio from "react-bootstrap/Ratio";
+import { FaTimes } from "react-icons/fa";
 
-const Modal = () => {
-  const { isModalOpen, closeModal } = useGlobalContext();
+const Trailer = () => {
+  const { isVideoOpen, closeVideo } = useGlobalContext();
   const { id } = useParams();
   const [video, setVideo] = useState();
+  const [playing, setPlaying] = useState(false);
 
   const fetchVideo = async () => {
     const { data } = await axios.get(
@@ -22,32 +21,32 @@ const Modal = () => {
 
   useEffect(() => {
     fetchVideo();
-  }, []);
-  // const width = window.screen.width <= 60 ? "350" : "640";
+  }, [id]);
+
   const opts = {
     height: "100%",
     width: "100%",
     playerVars: {
       autoplay: 1,
-      controls: 0,
-      cc_load_policy: 0,
-      fs: 0,
-      iv_load_policy: 0,
-      modestbranding: 0,
-      rel: 0,
-      showinfo: 0,
+      // controls: 0,
+      // cc_load_policy: 0,
+      // fs: 0,
+      // iv_load_policy: 0,
+      // modestbranding: 0,
+      // rel: 0,
+      // showinfo: 0,
     },
   };
 
   return (
     <div
       className={`${
-        isModalOpen ? "modal-overlay show-modal" : "modal-overlay"
+        isVideoOpen ? "modal-overlay show-modal" : "modal-overlay"
       }`}
     >
       <div className="modal-container">
         <YouTube videoId={video} opts={opts} />
-        <button className="close-modal-btn" onClick={closeModal}>
+        <button className="close-modal-btn" onClick={closeVideo}>
           <FaTimes />
         </button>
       </div>
@@ -55,4 +54,4 @@ const Modal = () => {
   );
 };
 
-export default Modal;
+export default Trailer;

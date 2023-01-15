@@ -7,6 +7,7 @@ const AppProvider = ({ children }) => {
   const [movies, setMovies] = useState([]);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
 
   const openSidebar = () => {
     setIsSidebarOpen(true);
@@ -22,6 +23,14 @@ const AppProvider = ({ children }) => {
 
   const closeModal = () => {
     setIsModalOpen(false);
+  };
+
+  const openVideo = () => {
+    setIsVideoOpen(true);
+  };
+
+  const closeVideo = () => {
+    setIsVideoOpen(false);
   };
 
   const fetchMovies = useCallback(async () => {
@@ -59,6 +68,9 @@ const AppProvider = ({ children }) => {
         openModal,
         closeModal,
         setIsSidebarOpen,
+        openVideo,
+        closeVideo,
+        isVideoOpen,
       }}
     >
       {children}
