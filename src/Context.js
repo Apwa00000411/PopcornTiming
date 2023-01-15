@@ -32,7 +32,7 @@ const AppProvider = ({ children }) => {
       );
       const data = await res.json();
       setMovies(data.results);
-      console.log(data.results);
+      // console.log(data.results);
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -48,6 +48,7 @@ const AppProvider = ({ children }) => {
     <AppContext.Provider
       value={{
         loading,
+        setLoading,
         searchTerm,
         setSearchTerm,
         movies,

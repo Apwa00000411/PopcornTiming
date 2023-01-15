@@ -7,6 +7,7 @@ import List from "./components/List";
 import Header from "./components/Header";
 import SearchMovies from "./pages/SearchMovies";
 import Footer from "./components/Footer";
+import Genres_ from "./pages/Genres_";
 
 function App() {
   return (
@@ -90,7 +91,9 @@ function App() {
             element={<Moviedetails />}
           ></Route>
           <Route path="movies/:type" element={<List />}></Route>
+          {/* <Route path="movies/:type/movies/genres" element={<List />}></Route> */}
           <Route path="movies/search" element={<SearchMovies />}></Route>
+
           <Route
             path="/*"
             element={

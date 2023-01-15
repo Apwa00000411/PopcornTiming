@@ -78,3 +78,13 @@
     height: 250px;
   }
 }
+
+@media (max-width: 450px) {
+  .cards {
+    height: 200px;
+    min-width: auto;
+  }
+  .cards__img {
+    height: 200px;
+  }
+}

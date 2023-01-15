@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import SimilarSingle from "./SimilarSingle";
 import "./similar-movie.css";
 import { BsStarFill } from "react-icons/bs/";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; //
+import { Carousel } from "react-responsive-carousel";
 
 const SimilarMovies = () => {
   const { id } = useParams();
@@ -23,11 +25,10 @@ const SimilarMovies = () => {
   return (
     <div className="similar__list">
       <h2 className="similar__name">{"similar movies".toUpperCase()}</h2>
-      <div className="similar__single">
-        {similarMovies.map((movie) => {
-          <SimilarSingle movie={movie} />;
-        })}
-      </div>
+
+      {similarMovies.slice(1, 6).map((movie, index) => {
+        <SimilarSingle key={index} movie={movie} />;
+      })}
     </div>
   );
 };

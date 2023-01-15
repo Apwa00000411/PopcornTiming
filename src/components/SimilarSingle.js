@@ -1,9 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./similar-movie.css";
 import { BsStarFill } from "react-icons/bs/";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { useGlobalContext } from "../Context";
+import Loading from "../pages/Loading";
 
 const SimilarSingle = ({ movie }) => {
+  const { id } = useParams();
+  const { loading, setLoading } = useGlobalContext();
+
+  // useEffect(() => {
+  //   setLoading(true);
+  //   setTimeout(() => {
+  //     setLoading(false);
+  //   }, 1500);
+  // }, []);
+
   return (
     <Link
       style={{ textDecoration: "none", color: "white" }}

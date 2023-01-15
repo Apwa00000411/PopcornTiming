@@ -1,25 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { unavailable } from "../../Config/Config";
+import Loading from "../../pages/Loading";
+import "../../components/card.css";
+import { useGlobalContext } from "../../Context";
+import { BsStarFill } from "react-icons/bs/";
+import { Link } from "react-router-dom";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import { Link, useParams } from "react-router-dom";
-import { BsStarFill } from "react-icons/bs/";
-import "./card.css";
 
-const Card = ({ movie }) => {
-  const [isLoading, setLoading] = useState(true);
-  const { type } = useParams();
+const Discover = ({ id, poster, title, date, vote, overview, page }) => {
+  const { loading, setLoading } = useGlobalContext();
 
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 1500);
-  }, [type]);
+    }, 3000);
+  }, [page]);
 
-  const screen = window.screen.width;
   return (
     <>
-      {isLoading ? (
+      {loading ? (
         <div className="cards">
           <SkeletonTheme baseColor="#202020" highlightColor="#444">
             <p>
@@ -30,30 +31,30 @@ const Card = ({ movie }) => {
       ) : (
         <Link
           style={{ textDecoration: "none", color: "white" }}
-          to={`./movie/${movie.id}`}
+          to={`./movie/${id}`}
         >
           <div className="cards">
             <img
               className="cards__img"
-              src={`https://image.tmdb.org/t/p/original${
-                movie ? movie.poster_path : ""
-              }`}
+              src={
+                poster
+                  ? `https://image.tmdb.org/t/p/original${poster}`
+                  : unavailable
+              }
             />
 
             <div className="cards__overlay">
-              <div className="card__title">
-                {movie ? movie.original_title : ""}
-              </div>
+              <div className="card__title">{title}</div>
 
               <div className="card__runtime">
-                {movie ? movie.release_date : ""}
+                {date ? date : ""}
                 <span className="card__rating">
-                  {movie ? movie.vote_average : ""}
+                  {vote}
                   <BsStarFill />
                 </span>
               </div>
               <div className="card__description">
-                {movie ? movie.overview.slice(0, 80) + "..." : ""}
+                {overview ? overview.slice(0, 80) + "..." : ""}
               </div>
             </div>
           </div>
@@ -63,4 +64,4 @@ const Card = ({ movie }) => {
   );
 };
 
-export default Card;
+export default Discover;

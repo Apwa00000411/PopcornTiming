@@ -16,30 +16,32 @@ import SimilarSingle from "../components/SimilarSingle";
 import { useGlobalContext } from "../Context";
 import HorizontalScroll from "react-horizontal-scrolling";
 import { AiOutlinePlayCircle } from "react-icons/ai/";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; //
+import { Carousel } from "react-responsive-carousel";
+import { unavailable, unavailableBackdrop } from "../Config/Config";
 
 const Moviedetails = () => {
   const [currentMovieDetails, setCurrentMovieDetails] = useState();
   const { id } = useParams();
-  const [isLoading, setIsLoading] = useState(true);
+
   const [addWatchlist, setAddWatchlist] = useState(true);
   const [similarMovies, setSimilarMovies] = useState();
-  const { openModal } = useGlobalContext();
+  const { openModal, loading, setLoading } = useGlobalContext();
 
   useEffect(() => {
     const getData = async () => {
-      setIsLoading(true);
+      setLoading(true);
       window.scrollTo(0, 0);
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 2000);
       try {
         const res = await fetch(
           `https://api.themoviedb.org/3/movie/${id}?api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US`
         );
         const data = await res.json();
         setCurrentMovieDetails(data);
+        setLoading(false);
       } catch (error) {
         console.log(error);
+        setLoading(false);
       }
     };
     getData();
@@ -47,9 +49,6 @@ const Moviedetails = () => {
 
   useEffect(() => {
     const getSimilar = async () => {
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 2000);
       try {
         const res = await fetch(
           `https://api.themoviedb.org/3/movie/${id}/similar?api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US&page=1`
@@ -65,16 +64,18 @@ const Moviedetails = () => {
 
   return (
     <>
-      {isLoading ? (
+      {loading ? (
         <Loading />
       ) : (
         <div className="movie">
           <div className="movie__intro">
             <img
               className="movie__backdrop"
-              src={`https://image.tmdb.org/t/p/original${
-                currentMovieDetails ? currentMovieDetails.backdrop_path : ""
-              }`}
+              src={
+                currentMovieDetails && currentMovieDetails.backdrop_path
+                  ? `https://image.tmdb.org/t/p/original${currentMovieDetails.backdrop_path}`
+                  : unavailableBackdrop
+              }
             />
           </div>
           <AiOutlinePlayCircle className="movie__play" onClick={openModal} />
@@ -86,9 +87,11 @@ const Moviedetails = () => {
                 ) : (
                   <img
                     className="movie__poster"
-                    src={`https://image.tmdb.org/t/p/original${
-                      currentMovieDetails ? currentMovieDetails.poster_path : ""
-                    }`}
+                    src={
+                      currentMovieDetails
+                        ? `https://image.tmdb.org/t/p/original${currentMovieDetails.poster_path}`
+                        : unavailable
+                    }
                   />
                 )}
               </div>
@@ -160,52 +163,6 @@ const Moviedetails = () => {
                       })
                     : ""}
                 </div>
-
-                <>
-                  {/* {!addWatchlist && alert("Your watchlist has been added!")}
-                  {addWatchlist && alert("You removed from watchlist!")} */}
-                  {/* {!addWatchlist && (
-                    <div className="alert alert-success shadow-lg gone">
-                      <div>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="stroke-current flex-shrink-0 h-6 w-6"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                          />
-                        </svg>
-                        <span>Your watchlist has been added!</span>
-                      </div>
-                    </div>
-                  )} */}
-
-                  {/* {addWatchlist && (
-                    <div className="alert alert-error shadow-lg gone">
-                      <div>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="stroke-current flex-shrink-0 h-6 w-6"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-                          />
-                        </svg>
-                        <span>You removed from watchlist!</span>
-                      </div>
-                    </div>
-                  )} */}
-                </>
               </div>
               <div className="movie__datailRightBottom">
                 <div className="synopsisText">Synopsis</div>
@@ -218,8 +175,8 @@ const Moviedetails = () => {
           <div className="similar__list">
             <h2 className="similar__name">{"similar movies".toUpperCase()}</h2>
             <div className="similar__single">
-              <HorizontalScroll className="similar__items">
-                {similarMovies?.map((movie) => (
+              <HorizontalScroll>
+                {similarMovies?.slice(1, 7).map((movie) => (
                   <SimilarSingle movie={movie} />
                 ))}
               </HorizontalScroll>
