@@ -24,7 +24,7 @@ const Movies = () => {
   };
 
   useEffect(() => {
-    window.scroll(0, 400);
+    // window.scrollTo(0, 100);
     fetchMovies();
     // eslint-disable-next-line
   }, [page, genreforURL]);

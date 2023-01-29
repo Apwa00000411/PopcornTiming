@@ -38,9 +38,6 @@ const List = () => {
         <h2 className="list__title">
           {(type ? type : "discover").toUpperCase()}
         </h2>
-        <Link to="./movies/genres">
-          <button className="list__genres">genres</button>
-        </Link>
       </div>
       <div className="list__cards">
         {movieLists.map((movie) => (

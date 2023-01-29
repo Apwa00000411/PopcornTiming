@@ -5,7 +5,7 @@ export default function CustomPagination({ setPage, numOfPages = 10 }) {
   // Scroll to top when page changes
   const handlePageChange = (page) => {
     setPage(page);
-    // window.scroll(0, 100);
+    window.scrollTo(0, 0);
   };
 
   return (
@@ -26,8 +26,8 @@ export default function CustomPagination({ setPage, numOfPages = 10 }) {
         count={500}
         color="primary"
         size="large"
-        hideNextButton
-        hidePrevButton
+        // hideNextButton
+        // hidePrevButton
       />
     </div>
   );

@@ -11,6 +11,7 @@
   height: 300px;
   z-index: 0;
   border: 1px solid rgb(99, 99, 99);
+  color: white;
 }
 
 .cards:hover {
@@ -67,6 +68,17 @@
   font-style: italic;
   font-size: 0.75rem;
   margin-bottom: 0.25rem;
+}
+
+/* WatchlistCard */
+.card__remove {
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: white;
+  display: block;
+  margin: 0 auto;
+  border-radius: 50%;
+  background-color: red;
 }
 
 @media (max-width: 620px) {

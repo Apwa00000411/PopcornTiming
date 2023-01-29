@@ -10,34 +10,6 @@ import Ratio from "react-bootstrap/Ratio";
 
 const Modal = () => {
   const { isModalOpen, closeModal } = useGlobalContext();
-  const { id } = useParams();
-  const [video, setVideo] = useState();
-
-  const fetchVideo = async () => {
-    const { data } = await axios.get(
-      `https://api.themoviedb.org/3/movie/${id}/videos?api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US`
-    );
-    setVideo(data.results[0]?.key);
-  };
-
-  useEffect(() => {
-    fetchVideo();
-  }, []);
-  // const width = window.screen.width <= 60 ? "350" : "640";
-  const opts = {
-    height: "100%",
-    width: "100%",
-    playerVars: {
-      autoplay: 1,
-      controls: 0,
-      cc_load_policy: 0,
-      fs: 0,
-      iv_load_policy: 0,
-      modestbranding: 0,
-      rel: 0,
-      showinfo: 0,
-    },
-  };
 
   return (
     <div
@@ -46,7 +18,10 @@ const Modal = () => {
       }`}
     >
       <div className="modal-container">
-        <YouTube videoId={video} opts={opts} />
+        <div className="modal__feature">
+          <CgDanger className="unavailable__icon" />
+          <h3>sorry... this feature is not available yet</h3>
+        </div>
         <button className="close-modal-btn" onClick={closeModal}>
           <FaTimes />
         </button>

@@ -49,10 +49,11 @@ const Home = () => {
       setLoading(false);
     }
   }, []);
+  fetchData();
 
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+  // useEffect(() => {
+  //   fetchData();
+  // }, [fetchData]);
 
   return (
     <>

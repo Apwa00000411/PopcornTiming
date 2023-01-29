@@ -7,13 +7,16 @@ import { AiOutlineUser, AiOutlineFire, AiOutlineStar } from "react-icons/ai";
 import { AiOutlineSearch, AiOutlineHome } from "react-icons/ai";
 import { MdOutlineFiberNew } from "react-icons/md";
 import { BsBookmark } from "react-icons/bs";
+import { useSelector } from "react-redux";
 
 const Sidebar = () => {
+  // const { amount, movieItems } = useSelector((state) => state.watchlist);
   const { isSidebarOpen, closeSidebar, setIsSidebarOpen, openModal } =
     useGlobalContext();
 
   let sidebarRef = useRef();
 
+  // console.log(movieItems);
   useEffect(() => {
     let handle = (e) => {
       if (!sidebarRef.current.contains(e.target)) {
@@ -59,10 +62,10 @@ const Sidebar = () => {
           <p>{"search".toUpperCase()}</p>
         </Link>
 
-        <div onClick={openModal} className="links__icon">
+        <Link to="watchlist" className="links__icon">
           <BsBookmark className="header__icon" />
           <p>{"watchlist".toUpperCase()}</p>
-        </div>
+        </Link>
 
         <Link
           to="movies/popular"

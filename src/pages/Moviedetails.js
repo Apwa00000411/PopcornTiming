@@ -24,27 +24,61 @@ import Trailer from "../components/Trailer/Trailer";
 import YouTube from "react-youtube";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { useDispatch, useSelector } from "react-redux";
+import { add, remove } from "../State/Slice/WatchlistSlice";
 
 const Moviedetails = () => {
   const [currentMovieDetails, setCurrentMovieDetails] = useState();
   const { id } = useParams();
 
-  const [addWatchlist, setAddWatchlist] = useState(true);
+  const [addWatchlist, setAddWatchlist] = useState(false);
   const [similarMovies, setSimilarMovies] = useState();
   const { openModal, loading, setLoading, openVideo, closeVideo } =
     useGlobalContext();
   const [video, setVideo] = useState();
-  const [playing, setPlaying] = useState(false);
+  const [playing, setPlaying] = useState(true);
+  const dispatch = useDispatch();
+  const { movieItems } = useSelector((state) => state.watchlist);
+
+  console.log(movieItems);
+  const handleAdd = (currentMovieDetails) => {
+    setAddWatchlist(!addWatchlist);
+    dispatch(add(currentMovieDetails));
+  };
+
+  const handleRemove = (currentMovieDetails) => {
+    setAddWatchlist(!addWatchlist);
+    dispatch(remove(currentMovieDetails));
+  };
+
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     setLoading(true);
+  //     window.scrollTo(0, 0);
+  //     try {
+  //       const res = await fetch(
+  //         `https://api.themoviedb.org/3/movie/${id}?api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US`
+  //       );
+  //       const data = await res.json();
+  //       setCurrentMovieDetails(data);
+  //       setLoading(false);
+  //     } catch (error) {
+  //       console.log(error);
+  //       setLoading(false);
+  //     }
+  //   };
+  //   getData();
+  // }, [id]);
 
   useEffect(() => {
     const getData = async () => {
       setLoading(true);
       window.scrollTo(0, 0);
+      setAddWatchlist();
       try {
-        const res = await fetch(
+        const { data } = await axios.get(
           `https://api.themoviedb.org/3/movie/${id}?api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US`
         );
-        const data = await res.json();
         setCurrentMovieDetails(data);
         setLoading(false);
       } catch (error) {
@@ -68,7 +102,7 @@ const Moviedetails = () => {
       }
     };
     getSimilar();
-  }, [id]);
+  }, [id, movieItems]);
 
   const fetchVideo = async () => {
     const { data } = await axios.get(
@@ -80,11 +114,12 @@ const Moviedetails = () => {
 
   useEffect(() => {
     fetchVideo();
-  }, [id]);
+  }, [id, movieItems]);
 
-  const width = window.screen.width <= 400 ? "350" : "750";
+  const width = window.screen.width <= 768 ? "350" : "850";
+  const height = window.screen.height <= 768 ? "300" : "580";
   const opts = {
-    height: "390",
+    height: height,
     width: width,
     playerVars: {
       autoplay: 1,
@@ -105,11 +140,7 @@ const Moviedetails = () => {
         <div className="movie">
           <div className="movie__intro">
             {loading ? (
-              <SkeletonTheme baseColor="#202020" highlightColor="#444">
-                <p>
-                  <Skeleton height={900} duration="3" />
-                </p>
-              </SkeletonTheme>
+              <img src={unavailableBackdrop} />
             ) : (
               <img
                 className="movie__backdrop"
@@ -120,14 +151,7 @@ const Moviedetails = () => {
                 }
               />
             )}
-
-            {/* <YouTube videoId={video} opts={opts} />; */}
           </div>
-          {/* {video ? (
-            <AiOutlinePlayCircle className="movie__play" onClick={openModal} />
-          ) : (
-            ""
-          )} */}
 
           <div className="movie__detail">
             <div className="movie__detailLeft">
@@ -158,17 +182,22 @@ const Moviedetails = () => {
                       className="movie__share"
                       onClick={openModal}
                     />
+                    {/* <BsBookmarkPlus
+                      className="movie__unadd"
+                      style={{ width: "25px" }}
+                      onClick={() => dispatch(addBookmark(currentMovieDetails))}
+                    /> */}
                     {!addWatchlist ? (
-                      <BsFillBookmarkPlusFill
-                        className="movie__add"
-                        style={{ width: "25px" }}
-                        onClick={() => setAddWatchlist(!addWatchlist)}
-                      />
-                    ) : (
                       <BsBookmarkPlus
                         className="movie__unadd"
                         style={{ width: "25px" }}
-                        onClick={() => setAddWatchlist(!addWatchlist)}
+                        onClick={() => handleAdd(currentMovieDetails)}
+                      />
+                    ) : (
+                      <BsFillBookmarkPlusFill
+                        className="movie__add"
+                        style={{ width: "25px" }}
+                        onClick={() => handleRemove(currentMovieDetails)}
                       />
                     )}
                   </div>
@@ -217,22 +246,28 @@ const Moviedetails = () => {
               <div className="movie__datailRightBottom">
                 <div className="synopsisText">Synopsis</div>
                 <div>
-                  {currentMovieDetails
-                    ? currentMovieDetails.overview.slice(0, 330) + "..."
-                    : ""}
+                  {currentMovieDetails ? currentMovieDetails.overview : ""}
                 </div>
               </div>
             </div>
           </div>
           <div className="youtube">
             <div className="synopsisText">Trailer</div>
-            <YouTube videoId={video} opts={opts} fullScreen />
+            {video ? (
+              <YouTube
+                videoId={video}
+                opts={opts}
+                allowsFullscreenVideo={true}
+              />
+            ) : (
+              <img src={unavailableBackdrop} />
+            )}
           </div>
           <div className="similar__list">
             <h2 className="similar__name">{"similar movies".toUpperCase()}</h2>
             <div className="similar__single">
               <HorizontalScroll>
-                {similarMovies?.slice(1, 7).map((movie) => (
+                {similarMovies?.slice(7, 13).map((movie) => (
                   <SimilarSingle movie={movie} />
                 ))}
               </HorizontalScroll>
