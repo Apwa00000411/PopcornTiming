@@ -34,7 +34,7 @@ const Home = () => {
   //   fetchData();
   // }, []));
 
-  const fetchData = useCallback(async () => {
+  const fetchData = async () => {
     setLoading(true);
 
     try {
@@ -48,8 +48,8 @@ const Home = () => {
       console.log(error);
       setLoading(false);
     }
-    fetchData();
-  }, []);
+  };
+  fetchData();
 
   // useEffect(() => {
   //   fetchData();
