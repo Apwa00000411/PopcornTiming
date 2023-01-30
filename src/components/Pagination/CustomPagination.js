@@ -11,11 +11,11 @@ export default function CustomPagination({ setPage, numOfPages = 500 }) {
   return (
     <div
       style={{
-        width: "90%",
+        maxWidth: "100%",
         display: "flex",
         justifyContent: "center",
         // alignItems: "center",
-        margin: "5rem auto",
+        margin: "3rem auto",
         background: "#fff",
         padding: "2px",
         borderRadius: "10px",
@@ -25,7 +25,7 @@ export default function CustomPagination({ setPage, numOfPages = 500 }) {
         onChange={(e) => handlePageChange(e.target.textContent)}
         count={numOfPages}
         color="primary"
-        size="large"
+        // size="small"
         // hideNextButton
         // hidePrevButton
       />

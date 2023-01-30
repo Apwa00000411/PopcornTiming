@@ -11,6 +11,7 @@ import Discover from "../components/Discover/Discover";
 import Movies from "./Movies";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import axios from "axios";
 
 const Home = () => {
   const [popularMovies, setPopularMovies] = useState([]);
@@ -34,26 +35,39 @@ const Home = () => {
   //   fetchData();
   // }, []));
 
-  const fetchData = async () => {
-    setLoading(true);
+  // const fetchData = async () => {
+  //   setLoading(true);
 
+  const fetchData = useCallback(async () => {
+    setLoading(true);
     try {
-      const res = await fetch(
+      const { data } = await axios.get(
         `https://api.themoviedb.org/3/movie/popular?api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US`
       );
-      const data = await res.json();
       setPopularMovies(data.results);
       setLoading(false);
     } catch (error) {
       console.log(error);
       setLoading(false);
     }
-  };
-  fetchData();
+  });
+  //   try {
+  //     const res = await fetch(
+  //       `https://api.themoviedb.org/3/movie/popular?api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US`
+  //     );
+  //     const data = await res.json();
+  //     setPopularMovies(data.results);
+  //     setLoading(false);
+  //   } catch (error) {
+  //     console.log(error);
+  //     setLoading(false);
+  //   }
+  // };
+  // fetchData();
 
-  // useEffect(() => {
-  //   fetchData();
-  // }, [fetchData]);
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <>
