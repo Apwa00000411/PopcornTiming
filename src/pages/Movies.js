@@ -6,6 +6,7 @@ import useGenre from "../hooks/useGenre";
 import CustomPagination from "../components/Pagination/CustomPagination";
 import Discover from "../components/Discover/Discover";
 import "../pages/movies.css";
+import Home from "./Home";
 
 const Movies = () => {
   const [genres, setGenres] = useState([]);
@@ -31,6 +32,12 @@ const Movies = () => {
 
   return (
     <div>
+      <Home
+        page={page}
+        genreforURL={genreforURL}
+        numOfPages={numOfPages}
+        setPage={setPage}
+      />
       <h1 className="page_title">Discover</h1>
       <Genres
         type="movie"

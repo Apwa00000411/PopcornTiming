@@ -28,14 +28,14 @@ main {
 .sidebar-toggle {
   position: fixed;
   top: 2rem;
-  left: 3rem;
+  right: 3rem;
   font-size: 2rem;
   background: transparent;
   border-color: transparent;
   color: red;
   transition: all 0.3s linear;
   cursor: pointer;
-  z-index: 999999;
+  z-index: 9999;
   animation: bounce 2s ease-in-out infinite;
 }
 

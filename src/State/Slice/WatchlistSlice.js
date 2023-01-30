@@ -52,7 +52,10 @@ const WatchlistSlice = createSlice({
 
       state.movieItems.push({ ...action.payload, amount: 1 });
       // state.amount += movieItem.amount;
-      toast.success("added to watchlist", { position: "top-right" });
+      toast.success("added to watchlist", {
+        position: "top-left",
+        zIndex: 999,
+      });
 
       localStorage.setItem(
         "movieItems",
@@ -70,15 +73,40 @@ const WatchlistSlice = createSlice({
             (item) => item.id !== currentMovieDetails.id
           );
           state.amount -= currentMovieDetails.amount;
-          toast.info("removed from watchlist", { position: "top-right" });
+
+          toast.warning("removed from watchlist", {
+            position: "top-left",
+            zIndex: 999,
+          });
         }
+        localStorage.setItem(
+          "movieItems",
+          JSON.stringify(
+            state.movieItems.map((currentMovieDetails) => currentMovieDetails)
+          )
+        );
+
+        localStorage.setItem("amount", JSON.stringify(state.amount));
       });
     },
 
     clear: (state) => {
       state.movieItems = [];
       state.amount = 0;
-      toast.info("cleared all watchlist", { position: "top-right" });
+
+      toast.warning("cleared all watchlist", {
+        position: "top-left",
+        zIndex: 999,
+      });
+
+      localStorage.setItem(
+        "movieItems",
+        JSON.stringify(
+          state.movieItems.map((currentMovieDetails) => currentMovieDetails)
+        )
+      );
+
+      localStorage.setItem("amount", JSON.stringify(state.amount));
     },
   },
 });

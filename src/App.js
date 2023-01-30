@@ -12,6 +12,7 @@ import Watchlist from "./pages/Watchlist";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
+import Movies from "./pages/Movies";
 
 function App() {
   const { amount, movieItems } = useSelector((state) => state.watchlist);
@@ -25,7 +26,7 @@ function App() {
         <ToastContainer />
         <Header />
         <Routes>
-          <Route path="/" element={<Home />}></Route>
+          <Route path="/" element={<Movies />}></Route>
 
           <Route path="movie/:id" element={<Moviedetails />}></Route>
 
