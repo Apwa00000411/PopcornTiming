@@ -10,6 +10,11 @@ const WatchlistCard = ({ movieItem }) => {
   const dispatch = useDispatch();
   const { poster_path, original_title, release_date, vote_average, overview } =
     movieItem;
+
+  const handleRemove = (movieItem) => {
+    dispatch(remove(movieItem));
+  };
+
   return (
     <div>
       <Link to={`./movie/${movieItem.id}`}>
@@ -37,10 +42,7 @@ const WatchlistCard = ({ movieItem }) => {
           </div>
         </div>
       </Link>
-      <HiX
-        className="card__remove"
-        onClick={() => dispatch(remove(movieItem))}
-      />
+      <HiX className="card__remove" onClick={() => handleRemove(movieItem)} />
     </div>
   );
 };

@@ -1,11 +1,11 @@
 import React from "react";
 import { Pagination } from "@mui/material";
 
-export default function CustomPagination({ setPage, numOfPages = 10 }) {
+export default function CustomPagination({ setPage, numOfPages = 500 }) {
   // Scroll to top when page changes
   const handlePageChange = (page) => {
     setPage(page);
-    window.scrollTo(0, 0);
+    // window.scrollTo(0, 0);
   };
 
   return (
@@ -23,7 +23,7 @@ export default function CustomPagination({ setPage, numOfPages = 10 }) {
     >
       <Pagination
         onChange={(e) => handlePageChange(e.target.textContent)}
-        count={500}
+        count={numOfPages}
         color="primary"
         size="large"
         // hideNextButton

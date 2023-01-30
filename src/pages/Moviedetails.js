@@ -26,6 +26,7 @@ import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { useDispatch, useSelector } from "react-redux";
 import { add, remove } from "../State/Slice/WatchlistSlice";
+import Movies from "./Movies";
 
 const Moviedetails = () => {
   const [currentMovieDetails, setCurrentMovieDetails] = useState();
@@ -132,6 +133,7 @@ const Moviedetails = () => {
       showinfo: 0,
     },
   };
+
   return (
     <>
       {loading ? (
@@ -267,7 +269,7 @@ const Moviedetails = () => {
             <h2 className="similar__name">{"similar movies".toUpperCase()}</h2>
             <div className="similar__single">
               <HorizontalScroll>
-                {similarMovies?.slice(7, 13).map((movie) => (
+                {similarMovies?.slice(0, 6).map((movie) => (
                   <SimilarSingle movie={movie} />
                 ))}
               </HorizontalScroll>

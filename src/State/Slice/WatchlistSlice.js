@@ -1,9 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 
+const items = localStorage.getItem("movieItems")
+  ? JSON.parse(localStorage.getItem("movieItems"))
+  : [];
+
+const amount = localStorage.getItem("amount")
+  ? JSON.parse(localStorage.getItem("amount"))
+  : 0;
+
 const initialState = {
-  movieItems: [],
-  amount: 0,
+  movieItems: items,
+  amount: amount,
 };
 
 const WatchlistSlice = createSlice({
@@ -45,6 +53,15 @@ const WatchlistSlice = createSlice({
       state.movieItems.push({ ...action.payload, amount: 1 });
       // state.amount += movieItem.amount;
       toast.success("added to watchlist", { position: "top-right" });
+
+      localStorage.setItem(
+        "movieItems",
+        JSON.stringify(
+          state.movieItems.map((currentMovieDetails) => currentMovieDetails)
+        )
+      );
+
+      localStorage.setItem("amount", JSON.stringify(state.amount));
     },
     remove: (state, action) => {
       state.movieItems.map((currentMovieDetails) => {
@@ -57,6 +74,7 @@ const WatchlistSlice = createSlice({
         }
       });
     },
+
     clear: (state) => {
       state.movieItems = [];
       state.amount = 0;
