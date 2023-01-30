@@ -48,8 +48,8 @@ const Home = () => {
       console.log(error);
       setLoading(false);
     }
+    fetchData();
   }, []);
-  fetchData();
 
   // useEffect(() => {
   //   fetchData();
