@@ -283,11 +283,23 @@ const Moviedetails = () => {
               </div>
               <div className="movie__datailRightBottom">
                 <div className="synopsisText">Synopsis</div>
-                <div>
-                  {currentMovieDetails
+
+                {window.screen.width <= 480 ? (
+                  <div>
+                    {currentMovieDetails
+                      ? currentMovieDetails.overview.slice(0, 450) + "..."
+                      : ""}
+                  </div>
+                ) : (
+                  <div>
+                    {currentMovieDetails ? currentMovieDetails.overview : ""}
+                  </div>
+                )}
+                {/* <div>
+                  {currentMovieDetails && window.screen.width <= 480
                     ? currentMovieDetails.overview.slice(0, 450) + "..."
-                    : ""}
-                </div>
+                    : currentMovieDetails.overview}
+                </div> */}
               </div>
             </div>
           </div>
