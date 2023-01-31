@@ -17,7 +17,7 @@ import { useGlobalContext } from "../Context";
 import HorizontalScroll from "react-horizontal-scrolling";
 import { AiOutlinePlayCircle } from "react-icons/ai/";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; //
-import { Carousel } from "react-responsive-carousel";
+// import { Carousel } from "react-responsive-carousel";
 import { unavailable, unavailableBackdrop } from "../Config/Config";
 import axios from "axios";
 import Trailer from "../components/Trailer/Trailer";
@@ -27,6 +27,9 @@ import "react-loading-skeleton/dist/skeleton.css";
 import { useDispatch, useSelector } from "react-redux";
 import { add, remove } from "../State/Slice/WatchlistSlice";
 import Movies from "./Movies";
+import Slider from "react-slick";
+import "./slick.css";
+import "./slick-theme.css";
 
 const Moviedetails = () => {
   const [currentMovieDetails, setCurrentMovieDetails] = useState();
@@ -132,6 +135,39 @@ const Moviedetails = () => {
       rel: 0,
       showinfo: 0,
     },
+  };
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 5,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
 
   return (
@@ -248,13 +284,15 @@ const Moviedetails = () => {
               <div className="movie__datailRightBottom">
                 <div className="synopsisText">Synopsis</div>
                 <div>
-                  {currentMovieDetails ? currentMovieDetails.overview : ""}
+                  {currentMovieDetails
+                    ? currentMovieDetails.overview.slice(0, 450) + "..."
+                    : ""}
                 </div>
               </div>
             </div>
           </div>
           <div className="youtube">
-            <div className="synopsisText">Trailer</div>
+            <div className="trailer">Trailer</div>
             {video ? (
               <YouTube
                 videoId={video}
@@ -268,11 +306,16 @@ const Moviedetails = () => {
           <div className="similar__list">
             <h2 className="similar__name">{"similar movies".toUpperCase()}</h2>
             <div className="similar__single">
-              <HorizontalScroll>
+              {/* <HorizontalScroll>
                 {similarMovies?.slice(0, 6).map((movie) => (
                   <SimilarSingle movie={movie} />
                 ))}
-              </HorizontalScroll>
+              </HorizontalScroll> */}
+              <Slider {...settings}>
+                {similarMovies?.slice(0, 11).map((movie) => (
+                  <SimilarSingle movie={movie} />
+                ))}
+              </Slider>
             </div>
           </div>
         </div>

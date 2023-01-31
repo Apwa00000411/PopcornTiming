@@ -163,6 +163,15 @@
 .youtube {
   max-width: 100%;
   max-height: auto;
+  /* display: block;
+  margin-left: auto; */
+  margin-top: 2.5rem;
+  /* padding: 0 3rem 3rem 3rem; */
+}
+
+.trailer {
+  color: #fff;
+  font-size: 1.5rem;
 }
 
 .similar__list {
@@ -252,5 +261,9 @@
 @media (max-width: 390px) {
   .synopsisText {
     margin-top: 0.5rem;
+  }
+
+  .youtube {
+    margin-top: max(10rem, 5%);
   }
 }
