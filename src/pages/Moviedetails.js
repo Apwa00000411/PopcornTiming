@@ -120,7 +120,7 @@ const Moviedetails = () => {
     fetchVideo();
   }, [id, movieItems]);
 
-  const width = window.screen.width <= 768 ? "350" : "850";
+  const width = window.screen.width <= 768 ? "350" : "800";
   const height = window.screen.height <= 768 ? "300" : "580";
   const opts = {
     height: height,
