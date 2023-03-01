@@ -40,7 +40,6 @@ const Movies = () => {
       />
       <h1 className="page_title">Discover</h1>
       <Genres
-        type="movie"
         selectedGenres={selectedGenres}
         setSelectedGenres={setSelectedGenres}
         genres={genres}

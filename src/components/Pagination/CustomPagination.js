@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Pagination } from "@mui/material";
 
-export default function CustomPagination({ setPage, numOfPages = 500 }) {
+export default function CustomPagination({ setPage, numOfPages }) {
   // Scroll to top when page changes
-  const handlePageChange = (page) => {
-    setPage(page);
-    // window.scrollTo(0, 0);
+  const handlePageChange = (value) => {
+    setPage(value);
   };
+
+  // useEffect(() => {
+  //   if (!currentPage) {
+  //     setCurrentPage(1);
+  //   }
+  // }, [currentPage]);
 
   return (
     <div
@@ -25,6 +30,8 @@ export default function CustomPagination({ setPage, numOfPages = 500 }) {
         onChange={(e) => handlePageChange(e.target.textContent)}
         count={numOfPages}
         color="primary"
+        // page={currentPage}
+
         // size="small"
         // hideNextButton
         // hidePrevButton

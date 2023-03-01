@@ -10,7 +10,7 @@ import { BsBookmark } from "react-icons/bs";
 import { useSelector } from "react-redux";
 
 const Sidebar = () => {
-  // const { amount, movieItems } = useSelector((state) => state.watchlist);
+  const { amount } = useSelector((state) => state.watchlist);
   const { isSidebarOpen, closeSidebar, setIsSidebarOpen, openModal } =
     useGlobalContext();
 
@@ -64,7 +64,9 @@ const Sidebar = () => {
 
         <Link to="watchlist" className="links__icon">
           <BsBookmark className="header__icon" />
-          <p>{"watchlist".toUpperCase()}</p>
+          <p>
+            {"watchlist".toUpperCase()}({amount})
+          </p>
         </Link>
 
         <Link
