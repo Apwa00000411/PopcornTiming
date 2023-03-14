@@ -4,6 +4,7 @@ import { BsStarFill } from "react-icons/bs/";
 import { Link, useParams } from "react-router-dom";
 import { useGlobalContext } from "../Context";
 import Loading from "../pages/Loading";
+import { unavailable } from "../Config/Config";
 
 const SimilarSingle = ({ movie }) => {
   const { id } = useParams();
@@ -23,9 +24,14 @@ const SimilarSingle = ({ movie }) => {
     >
       <div className="similar">
         <img
-          src={`https://image.tmdb.org/t/p/original${
-            movie ? movie.poster_path : ""
-          }`}
+          // src={`https://image.tmdb.org/t/p/original${
+          //   movie ? movie.poster_path : unavailable
+          // }`}
+          src={
+            movie
+              ? `https://image.tmdb.org/t/p/original${movie.poster_path}`
+              : unavailable
+          }
           className="similar__img "
         />
         <div className="similar__overlay">

@@ -4,6 +4,7 @@ import "./card.css";
 import { BsStarFill } from "react-icons/bs/";
 import Loading from "../pages/Loading";
 import { useGlobalContext } from "../Context";
+import { unavailable } from "../Config/Config";
 
 const SearchCard = ({
   id,
@@ -25,9 +26,14 @@ const SearchCard = ({
       <div className="cards">
         <img
           className="cards__img"
-          src={`https://image.tmdb.org/t/p/original${
-            poster_path ? poster_path : ""
-          }`}
+          // src={`https://image.tmdb.org/t/p/original${
+          //   poster_path ? poster_path : unavailable
+          // }`}
+          src={
+            poster_path
+              ? `https://image.tmdb.org/t/p/original${poster_path}`
+              : unavailable
+          }
         />
 
         <div className="cards__overlay">

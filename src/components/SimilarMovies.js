@@ -24,7 +24,11 @@ const SimilarMovies = () => {
 
   return (
     <div className="similar__list">
-      <h2 className="similar__name">{"similar movies".toUpperCase()}</h2>
+      {similarMovies ? (
+        <h2 className="similar__name">{"similar movies".toUpperCase()}</h2>
+      ) : (
+        <h2 className="similar__name">{"no related movies".toUpperCase()}</h2>
+      )}
 
       {similarMovies.slice(1, 6).map((movie, index) => {
         <SimilarSingle key={index} movie={movie} />;

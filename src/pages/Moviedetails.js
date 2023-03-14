@@ -315,8 +315,17 @@ const Moviedetails = () => {
               <img src={unavailableBackdrop} />
             )}
           </div>
+
           <div className="similar__list">
-            <h2 className="similar__name">{"similar movies".toUpperCase()}</h2>
+            {similarMovies?.length !== 0 ? (
+              <h2 className="similar__name">
+                {"similar movies".toUpperCase()}
+              </h2>
+            ) : (
+              <h2 className="similar__name">
+                {"no related movies".toUpperCase()}
+              </h2>
+            )}
             <div className="similar__single">
               {/* <HorizontalScroll>
                 {similarMovies?.slice(0, 6).map((movie) => (
